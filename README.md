@@ -1,5 +1,7 @@
 # Ubuntu
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub release](https://img.shields.io/github/release/savvydatainsights/ubuntu.svg)]()
+
 Built from ubuntu/bionic64 (Ubuntu 18.04.1 LTS) Vagrant box, and provisioned with:
 
 - [Docker](https://www.docker.com) version 18.06.0-ce, build 0ffa825
