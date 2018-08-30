@@ -1,11 +1,13 @@
 ---
 - hosts: default
-  gather_facts: no
   become: yes
+  roles:
+    - codeyourinfra.docker_compose
+    - codeyourinfra.maven
   tasks:
     - name: Install required packages
       apt:
-        name: "{{item}}"
+        name: "{{ item }}"
         update_cache: yes
       loop:
         - language-pack-pt
@@ -17,52 +19,14 @@
         - libsasl2-dev
         - libssl-dev
         - ldap-utils
-    - name: Add the Docker apt key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-    - name: Add the Docker apt repository
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
-    - name: Install Docker
-      apt:
-        name: docker-ce
-        update_cache: yes
-    - name: Install docker-compose
-      get_url:
-        url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: 0755
-    - name: Prepare Docker for Prometheus monitoring
-      copy:
-        src: docker-daemon.json
-        dest: /etc/docker/daemon.json
-    - name: Add the Oracle Java apt repository
-      apt_repository:
-        repo: ppa:webupd8team/java
-    - name: Accept the Oracle license
-      debconf:
-        name: oracle-java8-installer
-        question: shared/accepted-oracle-license-v1-1
-        value: 'true'
-        vtype: select
-    - name: Install Oracle Java 8
-      apt:
-        name: oracle-java8-set-default
-        update_cache: yes
-    - name: Download Maven
-      unarchive:
-        src: https://dev.savvydatainsights.co.uk/nexus/repository/savvy/files/apache-maven-3.5.3-bin.tar.gz
-        dest: /opt
-        remote_src: yes
-    - name: Create Maven link
-      alternatives:
-        name: maven
-        link: /usr/bin/mvn
-        path: /opt/apache-maven-3.5.3/bin/mvn
     - name: Install required python packages
       pip:
-        name: "{{item}}"
+        name: "{{ item }}"
       loop:
         - docker
         - docker-compose
         - python-ldap
+    - name: Prepare Docker for Prometheus monitoring
+      copy:
+        src: docker-daemon.json
+        dest: /etc/docker/daemon.json
