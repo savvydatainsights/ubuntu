@@ -16,7 +16,7 @@ before_script:
 
 script:
   - ansible-galaxy install -r requirements.yml
-  - packer build azure.json
+  - ./packer build azure.json
 
 notifications:
   slack:
