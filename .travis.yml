@@ -16,7 +16,7 @@ before_script:
 
 script:
   - ansible-galaxy install -r requirements.yml
-  - travis_wait ./packer build -force azure.json
+  - travis_wait 30 ./packer build -force azure.json
 
 notifications:
   slack:
