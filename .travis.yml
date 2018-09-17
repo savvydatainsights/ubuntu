@@ -1,6 +1,5 @@
----
 language: python
-python: "3.6"
+python: '3.6'
 
 addons:
   apt:
@@ -8,16 +7,16 @@ addons:
     - python-pip
 
 install:
-  - pip install ansible
+- pip install ansible
 
 before_script:
-  - wget https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip
-  - unzip packer_1.2.5_linux_amd64.zip
+- wget https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip
+- unzip packer_1.2.5_linux_amd64.zip
 
 script:
-  - ansible-galaxy install -r requirements.yml
-  - travis_wait 40 ./packer build -force azure.json
+- ansible-galaxy install -r requirements.yml
+- travis_wait 40 ./packer build -force azure.json
 
 notifications:
   slack:
-    secure: LRvftYwGZ+YumqIxAeJppAnJSgqZMldL3Lvd5FngZz+E0E6zWOeMJMm6eFB9x7NUfa8jVeG4y8+iJfYFUF9gzEqmYfbT5dIaZ9X7rsjIOWoRiI7v2aIfx6gpgLCZgH+6fmRXr8DIbjSRDtpJh9j14FuNFHX9g78uf4QlVItX4CUPH1Q4Djz1zLgv3Tg8YDaYGwB10ZQwb9NURh/TToXpLPtD3uk8b+C+6KcUxYDM/sYqf6Ok2ofRNz8lVw2TVaiRSEx7Vm1mwJE7ePPUxpidxGOU8qD6yM/nEdG4q4sFuEA+gHr7B0V2JK4FlWJDnvgWoi0TM3lZY9FPpLb7OfveAP6qiByMPFNnFWlrOOKEAlxaB83ywpzT2Bq6ZCWR8wWVyy/K5ZMBAXdF7NI0quulBVGbHTbVFWBfTjoe6uR/TR0UxxMYNRMTVLmXpZ0Hy8Fy2vazdpzeVtiiPHsTHr59L1SfHBSi/vWY8JMuO3icB4LcMSzQGTR0A6C9FIKui0FgONXIPoD/hckPGbGaA+kcXsJQVB40+sfhQMbVfNVR2zSvbq3T2Kzrb0oN2ZhrYE0W03BTG6hyY8eFipEcEXLHRhYMwRzevmiAGGSEUrwnAgcbsmyzPYeJWZ1u94uocpendj49Flf0EZdjJR4AlbHqJNMm5fuIwOu/U8MkAwEq2o8=
+    secure: pjLMf3g01FU6KNsf/jkAKB3EaHBXaKFxHw0U38bCKvCRVRN1O1B/e//kPYVpBwx//LY4Q1VDrDUa8AmBUU4AjwcNt1kUsd+iLatO6u5db/2PgP/c4trIYYYbQqX40GkUjl09ZZxqziXJJkCV9pXfNUE6otE6Dqo8+1gdD5eaNEXlwZp78J7N/LmucZHXNB3lPNEaFSBdFLIXczHmt2xnivdK9Xh8vE7X/8vbOmb3d9ZWcCQmuHlzcLYl5St3hAxCBRCRzR520xJvGa44/agSJ3N8Cn5b6X0JRjybcS7EtA2Cw0TlnvTEjN1rflPzuIxr7hIyuUpHruAHXjYT1o3hgvJ6//3LTyokuKf1Jyy0e/g/kDP4CBK4MVRyEwTkWE4l5ndAQARe328wE62026L60N5uaQHIYQEU6e31BuFhLBx6fr5i3pgXTa0DK7LyFhBO3CZBV35g+ZQTE8YIFdfrykYS4TAId/y/ZZLbzW2Q49cftBpRsusqtKbE4daxOrXncVE/9Eg/zOqwGiE2dJ0fm6bv26A/5sU4rSiQPEmARbSMThl1Y63ZONG9qng0BcfhsrE0iDP8ejgMXufSXkmhTIRwkO9UYymLEkj6lnEIPOQ/KR44HIb/gXw94hXFWSpcrQJ3tYncoyhRdO4iLx1VE+FSZOeyzXQsKRF9a9vwK5k=
