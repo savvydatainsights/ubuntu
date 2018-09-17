@@ -1,5 +1,6 @@
 ---
 - hosts: "{{ target | default('default') }}"
+  become: yes
   roles:
     - codeyourinfra.docker_compose
     - codeyourinfra.maven
