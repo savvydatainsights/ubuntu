@@ -17,19 +17,11 @@ The provision process is performed by [Ansible](https://www.ansible.com). Instal
 
 ## Vagrant box
 
-For creating the Vagrant box, first of all, install [Vagrant](https://www.vagrantup.com), and then follow the steps:
+For creating the Vagrant box, first of all, install [Vagrant](https://www.vagrantup.com), and then run:
 
-1. `vagrant box update`
-2. `vagrant up`
-3. `vagrant ssh`
-   1. `sudo apt-get clean`
-   2. `sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*`
-   3. `sudo dd if=/dev/zero of=/EMPTY bs=1M`
-   4. `sudo rm -f /EMPTY`
-   5. `cat /dev/null > ~/.bash_history && history -c && exit`
-4. `vagrant package --output ubuntu.box`
-5. `vagrant box add --name savvydatainsights/ubuntu ubuntu.box`
-6. `vagrant destroy -f && rm -rf .vagrant/ ubuntu-bionic-18.04-cloudimg-console.log roles/`
+`./build-and-deploy.sh`
+
+The deployment step requires the environment variable *VAGRANT_CLOUD_TOKEN*. To set it, you must have defined a [token in Vagrant Cloud](https://www.vagrantup.com/docs/vagrant-cloud/users/authentication.html#authentication-tokens).
 
 ## Azure image
 
@@ -38,5 +30,4 @@ For creating the Azure image, first of all, install [Packer](https://www.packer.
 1. Create the resource group *myResourceGroup* in Azure
 2. Create a service principal in Azure with permission to create resource groups
 3. Set the environment variables *AZURE_CLIENT_ID*, *AZURE_SECRET*, *AZURE_SUBSCRIPTION_ID* and *AZURE_TENANT* with the service principal authentication info
-4. Install the required Ansible roles by executing `ansible-galaxy install -r requirements.yml`
-5. Build the Ubuntu image *myUbuntuImage* in the resource group *myResourceGroup* by executing `packer build azure.json`
+4. Build the Ubuntu image *myUbuntuImage* in the resource group *myResourceGroup* by executing `packer build azure.json`

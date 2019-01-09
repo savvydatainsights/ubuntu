@@ -25,6 +25,10 @@
       "vm_size": "Standard_DS2_v2"
     }],
   "provisioners": [{
+      "type": "shell-local",
+      "command": "ansible-galaxy install -r requirements.yml -p roles"
+    },
+    {
       "type": "ansible",
       "playbook_file": "./playbook.yml",
       "extra_arguments": [ "--extra-vars", "ansible_python_interpreter=/usr/bin/python3" ]
