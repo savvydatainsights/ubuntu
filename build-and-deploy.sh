@@ -3,6 +3,16 @@
 VAGRANT_CLOUD_USER=savvydatainsights
 VAGRANT_CLOUD_BOX=ubuntu
 
+cleanup_and_exit()
+{
+	echo "Removing the $VAGRANT_CLOUD_BOX server"
+    vagrant destroy -f
+
+    echo "Cleaning up everything and exiting"
+    rm -rf .vagrant ubuntu-*-cloudimg-console.log roles *-version.txt box-update-output.txt $BOX_FILE
+    exit $1
+}
+
 BOX_VERSION=$(date '+%Y%m%d.0.0')
 BOX_FILE=$VAGRANT_CLOUD_BOX-$BOX_VERSION.box
 
@@ -15,6 +25,9 @@ vagrant up --no-provision
 
 echo "Provisioning the $VAGRANT_CLOUD_BOX server"
 vagrant provision
+if [ $? -ne 0 ]; then
+    cleanup_and_exit 1
+fi
 UBUNTU_VERSION=$(cat ubuntu-version.txt)
 
 echo "Baking the $VAGRANT_CLOUD_BOX server"
@@ -26,9 +39,4 @@ JAVA_VERSION=$(cat java-version.txt)
 VERSION_DESCRIPTION="Built from $BASE_BOX_VERSION - $UBUNTU_VERSION - and provisioned with Oracle JDK $JAVA_VERSION."
 vagrant cloud publish $VAGRANT_CLOUD_USER/$VAGRANT_CLOUD_BOX $BOX_VERSION virtualbox $BOX_FILE --version-description "$VERSION_DESCRIPTION" --force --release
 
-echo "Removing the $VAGRANT_CLOUD_BOX server"
-vagrant destroy -f
-
-echo "Cleaning up everything and exiting"
-rm -rf .vagrant ubuntu-*-cloudimg-console.log roles *-version.txt box-update-output.txt $BOX_FILE
-exit 0
+cleanup_and_exit 0
