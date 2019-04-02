@@ -35,8 +35,11 @@ rm -f $BOX_FILE && vagrant package --output $BOX_FILE
 
 # Requires VAGRANT_CLOUD_TOKEN
 echo "Publish the new box version in Vagrant Cloud"
+DOCKER_VERSION=$(cat docker-version.txt)
+DOCKER_COMPOSE_VERSION=$(cat docker-compose-version.txt)
 JAVA_VERSION=$(cat java-version.txt)
-VERSION_DESCRIPTION="Built from $BASE_BOX_VERSION - $UBUNTU_VERSION - and provisioned with Oracle JDK $JAVA_VERSION."
+MAVEN_VERSION=$(cat maven-version.txt)
+VERSION_DESCRIPTION="Built from $BASE_BOX_VERSION - $UBUNTU_VERSION - and provisioned with Docker $DOCKER_VERSION, Docker Compose $DOCKER_COMPOSE_VERSION, Oracle JDK $JAVA_VERSION and Apache Maven $MAVEN_VERSION."
 vagrant cloud publish $VAGRANT_CLOUD_USER/$VAGRANT_CLOUD_BOX $BOX_VERSION virtualbox $BOX_FILE --version-description "$VERSION_DESCRIPTION" --force --release
 
 cleanup_and_exit 0

@@ -1,0 +1,25 @@
+---
+- name: Change UTC to local timezone
+  timezone:
+    name: Europe/London
+
+- name: Disable tymesyncd
+  shell: timedatectl set-ntp off
+
+- name: Install NTP
+  apt:
+    name: ntp
+    update_cache: yes
+
+- name: Configure NTP
+  lineinfile:
+    path: /etc/ntp.conf
+    regexp: '^(pool {{ item }}\.)ubuntu(\.pool\.ntp\.org iburst)$'
+    line: '\1uk\2'
+    backrefs: true
+  loop: "{{ range(0, 4) | list }}"
+
+- name: Restart NTP
+  service:
+    name: ntp
+    state: restarted

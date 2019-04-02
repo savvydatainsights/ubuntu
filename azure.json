@@ -41,5 +41,10 @@
       ],
       "inline_shebang": "/bin/sh -x",
       "type": "shell"
-    }]
+    },
+    {
+      "type": "shell-local",
+      "command": "rm -rf roles *-version.txt"
+    }
+  ]
 }
