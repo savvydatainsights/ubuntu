@@ -8,6 +8,7 @@ Custom Ubuntu image, built from Ubuntu 18.04 LTS, and provisioned with:
 - [docker-compose](https://docs.docker.com/compose)
 - [OpenJDK](https://openjdk.java.net)
 - [Apache Maven](https://maven.apache.org)
+- [Apache Spark](https://spark.apache.org)
 - [Mozilla Firefox](https://www.mozilla.org)
 - [LDAP Utils](https://wiki.debian.org/LDAP/LDAPUtils)
 
