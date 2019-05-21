@@ -1,6 +1,5 @@
 ---
-- hosts: "{{ target | default('default') }}"
-  become: yes
+- hosts: default
 
   roles:
     - codeyourinfra.docker_compose
@@ -29,6 +28,22 @@
         - docker
         - docker-compose
         - python-ldap
+
+    - name: Install Apache Spark 2.4.3
+      block:
+        - name: Create Spark dir
+          file:
+            path: /opt/spark
+            state: directory
+        - name: Download and unarchive Spark
+          unarchive:
+            src: http://mirrors.up.pt/pub/apache/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz
+            dest: /opt/spark
+            remote_src: yes
+            extra_opts:
+              - --strip-components=1
+            owner: root
+            group: root
 
     - name: Disable Ubuntu unattended-upgrades during startup, to enable apt-get provisioning.
       ini_file:

@@ -39,7 +39,7 @@ DOCKER_VERSION=$(cat docker-version.txt)
 DOCKER_COMPOSE_VERSION=$(cat docker-compose-version.txt)
 JAVA_VERSION=$(cat java-version.txt)
 MAVEN_VERSION=$(cat maven-version.txt)
-VERSION_DESCRIPTION="Built from $BASE_BOX_VERSION - $UBUNTU_VERSION - and provisioned with Docker $DOCKER_VERSION, Docker Compose $DOCKER_COMPOSE_VERSION, OpenJDK $JAVA_VERSION and Apache Maven $MAVEN_VERSION."
+VERSION_DESCRIPTION="Built from $BASE_BOX_VERSION - $UBUNTU_VERSION - and provisioned with Docker $DOCKER_VERSION, Docker Compose $DOCKER_COMPOSE_VERSION, OpenJDK $JAVA_VERSION, Apache Maven $MAVEN_VERSION and Apache Spark 2.4.3."
 vagrant cloud publish $VAGRANT_CLOUD_USER/$VAGRANT_CLOUD_BOX $BOX_VERSION virtualbox $BOX_FILE --version-description "$VERSION_DESCRIPTION" --force --release
 
 cleanup_and_exit 0
